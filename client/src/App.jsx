@@ -1,13 +1,18 @@
-
-import InitialScene from "./components/Scenes/InitialScene";
+import InitialScene from "./components/scenes/InitialScene";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from "./components/page/Login";
 import Signup from "./components/page/Signup";
 import HomeScene from "./components/scenes/HomeScene";
+
 import Schedule from "./components/page/Schedule";
 import Diary from './components/page/Diary'
 import Board from './components/common/Board'
 import Editor from './components/common/Editor'
+import '@fontsource/roboto/300.css'
+import '@fontsource/roboto/400.css'
+import '@fontsource/roboto/500.css'
+import '@fontsource/roboto/700.css'
+
 function App() {
   return (
     <BrowserRouter>

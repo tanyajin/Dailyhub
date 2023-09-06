@@ -20,10 +20,10 @@ diaryHandler.getAll
 )
 
 
-// router.get('/allfavorites',
-// tokenValidate,
-// diaryHandler.getfavorites
-// )
+router.get('/allfavorites',
+tokenValidate,
+diaryHandler.getfavorites
+)
 
 router.get('/:diaryId',
 param('diaryId').custom(value=>{
@@ -52,17 +52,17 @@ tokenValidate,
 diaryHandler.update
 )
 
-// router.delete('/:diaryId',
-// param('diaryId').custom(value=>{
-//     if(!objectIdValidate(value)){
-//         return Promise.reject('invalid id')
-//     }else return Promise.resolve()
+router.delete('/:diaryId',
+param('diaryId').custom(value=>{
+    if(!objectIdValidate(value)){
+        return Promise.reject('invalid id')
+    }else return Promise.resolve()
     
-// }),
-// requestHandler, 
-// tokenValidate,
-// diaryHandler.delete
-// )
+}),
+requestHandler, 
+tokenValidate,
+diaryHandler.delete
+)
 
 
 

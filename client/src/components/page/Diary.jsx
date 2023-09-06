@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector,useDispatch } from 'react-redux'
-import { useEffect ,useState} from 'react'
+import { useEffect} from 'react'
 import {useNavigate, useParams,Link, Outlet} from 'react-router-dom'
 
 import {Drawer,List,ListItem,Typography,IconButton,Box,ListItemButton} from '@mui/material'
@@ -11,12 +11,14 @@ import tokenValidate from '../../tools/tokenValidate'
 import diaryApi from '../../api/diaryApi'
 import { setUser } from '../../redux/features/userSlice'
 import {setDiarys} from '../../redux/features/diarySlice'
-import Board from '../common/Board'
+import {setFavoritesList } from '../../redux/features/favoritesSlice'
+
 
 export default function Diary() {
   const {diaryId} = useParams()
   const user =useSelector((state)=>state.user.value)
   const diarys =useSelector((state)=>state.diary.value)
+  const favorites = useSelector((state)=>state.allFavorites.value)
   const navigate = useNavigate();
   const dispatch =useDispatch();
  
@@ -39,7 +41,9 @@ export default function Diary() {
     const getDiarys=async()=>{
       try{
         const diarys =await diaryApi.getAll();
+        const favoitesDiarys =await diaryApi.getFavorites()
         dispatch(setDiarys(diarys))
+        dispatch(setFavoritesList(favoitesDiarys))
         if (diarys.length > 0 && diaryId === undefined) {
           navigate(`/diary/${diarys[0].id}`)
         }
@@ -68,6 +72,10 @@ const AddDiary=async()=>{
     alert(error)
   }
 }
+
+
+
+
 const sidebarWidth = 250
   return (
     <Box sx={{
@@ -92,15 +100,16 @@ const sidebarWidth = 250
         }}
         
       >
-          <ListItem>
+          <ListItem  sx={{ paddingTop:'5px', paddingBottom:'0px', marginTop:'20px',marginBottom:'20px'}}>
               <Box sx={{
                   width:'100%',
                   display:'flex',
                   alignItems:'center',
-                  justifyContent:'space-between'
+                  justifyContent:'space-between',
               }}> 
               
-               <Typography variant='body2' fontWeight='1000'>
+               <Typography variant='body1' fontWeight='1000' 
+               sx={{padding:'0px',margin:'0px'}}>
                   😊 Hi, {user.username}   
                   </Typography>
                   <IconButton onClick={Return}>
@@ -108,7 +117,7 @@ const sidebarWidth = 250
                   </IconButton>
               </Box>
           </ListItem>
-          <ListItem>
+          <ListItem  sx={{ paddingTop:'5px', paddingBottom:'0px', marginTop:'5px',marginBottom:'0px'}}> 
                   <Box sx={{
                     paddingTop:'10px',
                     width:'100%',
@@ -117,14 +126,38 @@ const sidebarWidth = 250
                     justifyContent:'space-between'
                 }}> 
 
-                    <Typography variant='body2' fontWeight='1000'>
-                    💌Favorites
+                    <Typography variant='body1' fontWeight='1000'>
+                    💌 Favorites
                     </Typography>
                     </Box>
-             </ListItem>
+             </ListItem >
+             {
+                            favorites.map((item, index) => (
+                            
+                                <ListItem key={index} sx={{
+                                  pl:'0px',
+                                  pr:'0px',
+                                  margin:'0px'
+                              }}>
+                                    <ListItemButton component={Link}
+                                            to={`/diary/${item.id}`} >
+                                            <Typography 
+                                              variant='body2'
+                                              fontWeight="700"
+                                              sx={{ whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',pl:'20px'}}
+                                              >
+                                               {item.title}
+                                            </Typography>
+
+                                        </ListItemButton>
+                                </ListItem>
+                               
+                            ))
+                        }
 
 
-          <ListItem>
+
+          <ListItem sx={{ paddingTop:'5px', paddingBottom:'0px', marginTop:'5px',marginBottom:'0px'}}>
                   <Box sx={{
                     paddingTop:'10px',
                     width:'100%',
@@ -133,8 +166,8 @@ const sidebarWidth = 250
                     justifyContent:'space-between'
                 }}> 
 
-                    <Typography variant='body2' fontWeight='700'>
-                    📃Diary
+                    <Typography variant='body1' fontWeight='700'>
+                    📃 Diary
                     </Typography>
                     <IconButton onClick={AddDiary}>
                     <AddBoxOutlinedIcon fontSize='small'/>
@@ -145,12 +178,17 @@ const sidebarWidth = 250
                  {
                             diarys.map((item, index) => (
                             
-                                <ListItem key={index}>
-                                    <ListItemButton>
+                                <ListItem key={index} sx={{
+                                  pl:'0px',
+                                  pr:'0px',
+                                  margin:'0px'
+                              }}>
+                                    <ListItemButton component={Link}
+                                            to={`/diary/${item.id}`}>
                                             <Typography 
                                               variant='body2'
                                               fontWeight="700"
-                                              sx={{ whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}
+                                              sx={{ whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',pl:'20px'}}
                                               >
                                                {item.title}
                                             </Typography>
@@ -167,16 +205,12 @@ const sidebarWidth = 250
           </List>
       </Drawer>
 
-      <Box sex={{
-        flexGrow:1,
-        p:1,
-        width:'max-content'
-      }}>
+      
 
       <Outlet/>
 
 
-      </Box>
+      
     
 
     </Box>

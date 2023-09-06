@@ -4,10 +4,20 @@ import {Box,TextField,Button} from '@mui/material'
 import LoadingButton from '@mui/lab/LoadingButton'
 import userApi from '../../api/userApi'
 import tokenValidate from '../../tools/tokenValidate'
-
+import { Canvas } from "@react-three/fiber";
+import { Scroll, ScrollControls } from "@react-three/drei";
+import * as THREE from 'three';
+import { angleToRadians } from '../../tools/angle'
+import { OrbitControls, Environment } from '@react-three/drei';
+import RoomOverview from '../scenes/RoomOverview';
 const Signup = () => {
   const [loading, setLoading] = useState(false);
   const navigate =useNavigate()
+
+  function handleNavigate() {
+    navigate('/login')
+  }
+
   //验证是否已经登录 
   const checkToken = async () =>{
     const isAuthenticated  = await tokenValidate.isAuthenticated()
@@ -121,9 +131,45 @@ const Signup = () => {
 
   return (
     <>
-    <Box
+
+<Canvas shadows >
+        <ScrollControls pages={1} style={{
+     marginLeft:'35%',
+     marginTop:'15%',
+ 
+
+  }}>
+          <Scroll>
+         
+            <OrbitControls enableZoom={false} minPolarAngle={angleToRadians(60)} maxPolarAngle={angleToRadians(60)} />
+
+            <ambientLight args={['#ffffff', 0.25]} />
+            <spotLight args={['#ffffff', 1.5, 7, angleToRadians(45), 0.4]} position={[-1, 1, 0]} castShadow />
+            <directionalLight args={['#ffffff', 0.5]} position={[-1, 3, 0]} />
+
+            <RoomOverview />
+
+            <Environment background>
+              <mesh scale={100}>
+                <sphereGeometry args={[1, 1, 1]} />
+                <meshBasicMaterial color='#b98b93' side={THREE.BackSide} />
+
+              </mesh>
+            </Environment>
+
+
+          </Scroll>
+         
+          <Scroll html style={{
+   
+  }}>
+      
+          <Box
      component='form'
-     sx={{mt:1}}
+     sx={{
+      width: '500px' 
+   
+  }}
      onSubmit={handleSubmit}
      noValidate
     >
@@ -177,8 +223,7 @@ const Signup = () => {
     </LoadingButton>
    
     <Button 
-        component={Link}
-        to='/login'
+        onClick={handleNavigate}
         sx={{textTransform:'none'}}
         fullWidth
         >
@@ -186,6 +231,16 @@ const Signup = () => {
       </Button>
 
     </Box>
+
+
+           
+
+          </Scroll>
+        </ScrollControls>
+
+      </Canvas>
+
+   
   
   
   

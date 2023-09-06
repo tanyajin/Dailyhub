@@ -43,14 +43,14 @@ exports.getOne = async (req, res) => {
 
 exports.update = async (req, res) => {
     const { diaryId } = req.params
-    const { title, description, favorites } = req.body
+    const { title, description, favorites,content} = req.body
 
     try {
         if (title === '') req.body.title = 'Untitled'
-        
 
         if (description === '')  req.body.description = 'Add description here'
         
+     
 
         const currentDiary = await Diary.findById(diaryId)
 
@@ -94,54 +94,55 @@ exports.update = async (req, res) => {
 }
 
 
-// exports.getfavorites =async(req,res)=>{
-//     try{
-//         const allfavorites = await Diary.find({
-//             user:req.user._id,
-//             favorites:true
-//         }).sort('-favoritesPosition')
-//         res.status(200).json(allfavorites)
-//     }catch(error){
-//         console.log('无法获取收藏日记')
-//         res.status(500).json(error)
-//     }
-// }
+exports.getfavorites =async(req,res)=>{
+    try{
+        const allfavorites = await Diary.find({
+            user:req.user._id,
+            favorites:true
+        }).sort('-favoritesPosition')
+        res.status(200).json(allfavorites)
+    }catch(error){
+        console.log('无法获取收藏日记')
+        res.status(500).json(error)
+    }
+}
 
 
-// exports.delete =async(req,res)=>{
-//     const {DiaryId} = req.params
-//     try{
+exports.delete =async(req,res)=>{
+    const {diaryId} = req.params
+    try{
 
-//         const currentDiary =await Diary.findById(DiaryId)
+        const currentDiary =await Diary.findById(diaryId)
+//取出除了当前diaryid之外的该用户其他收藏diary
+        if(currentDiary.favorites){
+            const allfavorites = await Diary.find({
+                user: currentDiary.user,
+                favorites: true,
+                _id: { $ne: diaryId }
+            }).sort('favoritesPosition')
+//给取消收藏之外的favorites重新排位置
+            for (const key in allfavorites) {
+                const element = allfavorites[key]
+                await Diary.findByIdAndUpdate(
+                    element.id,
+                    {$set:{favoritesPosition:key}}
+                )
+            }
+        }
+//删除当前日记并给剩下的重新排位置
+        await Diary.deleteOne({_id:diaryId})
+        const Diarys = await Diary.find().sort('position')
+        for (const key in Diarys) {
+            const diary = Diarys[key]
+            await Diary.findByIdAndUpdate(
+                diary.id,
+                { $set: { position: key } }
+            )
+        }
+        res.status(200).json('deleted')
+    }catch(error){
+        console.log('无法删除当前日记')
+        res.status(500).json(error)
+    }
 
-//         if(currentDiary.favorites){
-//             const allfavorites = await Diary.find({
-//                 user: currentDiary.user,
-//                 favorites: true,
-//                 _id: { $ne: DiaryId }
-//             }).sort('favoritesPosition')
-
-//             for (const key in allfavorites) {
-//                 const element = allfavorites[key]
-//                 await Diary.findByIdAndUpdate(
-//                     element.id,
-//                     {$set:{favoritesPosition:key}}
-//                 )
-//             }
-//         }
-//         await Diary.deleteOne({_id:DiaryId})
-//         const Diarys = await Diary.find().sort('position')
-//         for (const key in Diarys) {
-//             const Diary = Diarys[key]
-//             await Diary.findByIdAndUpdate(
-//                 Diary.id,
-//                 { $set: { position: key } }
-//             )
-//         }
-//         res.status(200).json('deleted')
-//     }catch(error){
-//         console.log('无法删除当前日记')
-//         res.status(500).json(error)
-//     }
-
-// }
+}

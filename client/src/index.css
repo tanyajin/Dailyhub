@@ -1,14 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* #root {
+#root {
   width: 100vw;
   height: 100vh;
 }
 
 body {
   margin: 0;
-} */
+}
 
 html,
 body,
@@ -52,7 +52,7 @@ b { /* used for event dates/times */
 }
 
 .demo-app-sidebar-section {
-  padding: 2em;
+  margin: 1em;
 }
 
 .demo-app-main {
