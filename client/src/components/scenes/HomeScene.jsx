@@ -1,8 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useNavigate} from 'react-router-dom'
 import tokenValidate from '../../tools/tokenValidate'
-import MainRoom from './MainRoom'
-import Reactscene from '../scenes/Reactscene'
+import MainHome from './MainHome'
 
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../redux/features/userSlice';
@@ -29,7 +28,7 @@ export default function HomeScene() {
   return (
     <>
          {/* <MainRoom /> */}
-         <Reactscene></Reactscene>
+         <MainHome></MainHome>
     </>
   );
 };

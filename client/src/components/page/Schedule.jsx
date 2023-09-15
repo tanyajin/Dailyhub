@@ -5,7 +5,7 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import { v4 as uuidv4 } from 'uuid';
+
 import { INITIAL_EVENTS } from '../../tools/event-utils';
 import {IconButton} from '@mui/material'
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined'
