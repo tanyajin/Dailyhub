@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //路由中间件
 //将路由处理程序与指定的路径前缀关联起来。
-//这意味着所有以/api/v1开头的请求将由./src/v1/routes模块处理。
+//这意味着所有以/myroom开头的请求将由./src/v1/routes模块处理。
 app.use('/myroom', require('./src/routes'));
 
 module.exports = app;
