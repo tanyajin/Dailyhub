@@ -69,19 +69,31 @@ function Schedule() {
    
   };
 
-  const handleEventClick = (clickInfo) => {
+  const handleEventClick = async(clickInfo) => {
     if (confirm(`❓Are you sure to delete the event? '${clickInfo.event.title}'`)) {
+      console.log(clickInfo.event.id)
+      try {
+        const res = await eventApi.deleteEvent({
+         id:clickInfo.event.id,
+        });
+        console.log("删除事件"+res)
+      }catch{
+        console.error(error)
+      }
       clickInfo.event.remove();
     }
   };
-
+  let currentlength;
   const handleEvents = async () => {
-    try {
-      const res = await eventApi.getAll();
-      setCurrentEvents(res);
-    } catch (error) {
-      console.error('Failed to get events:', error);
+    if(currentlength!==currentEvents.length){
+      try {
+        const res = await eventApi.getAll();
+        setCurrentEvents(res);
+      } catch (error) {
+        console.error('Failed to get events:', error);
+      }
     }
+      currentlength=currentEvents.length
   };
 
   const renderEventContent = (eventInfo) => {
@@ -159,7 +171,7 @@ function Schedule() {
           selectMirror={true}
           dayMaxEvents={true}
           weekends={weekendsVisible}
-          initialEvents={INITIAL_EVENTS}
+        
       
           select={handleDateSelect}
           eventContent={renderEventContent}

@@ -17,5 +17,10 @@ tokenValidate,
 eventHandler.getAll
 )
 
+router.delete('/',
+tokenValidate,
+eventHandler.deleteEvent
+)
+
 module.exports = router
 

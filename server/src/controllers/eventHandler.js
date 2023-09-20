@@ -30,3 +30,14 @@ exports.create = async (req, res) => {
         res.status(500).json(error)
     }
 }
+
+exports.deleteEvent = async (req, res) => {
+  try {
+    console.log("eventhandler中的body.id是："+req.body.id.id)
+    await Event.deleteOne({id:req.body.id.id})
+    res.status(200).json('已删除对应事件')
+  } catch (error) {
+    console.log('删除事件失败'+error);
+    res.status(500).json(error);
+  }
+  };
