@@ -85,7 +85,7 @@ function Schedule() {
   };
   let currentlength;
   const handleEvents = async () => {
-    if(currentlength!==currentEvents.length){
+    if(currentlength===currentEvents.length){
       try {
         const res = await eventApi.getAll();
         setCurrentEvents(res);
@@ -171,7 +171,7 @@ function Schedule() {
           selectMirror={true}
           dayMaxEvents={true}
           weekends={weekendsVisible}
-        
+          events={currentEvents}
       
           select={handleDateSelect}
           eventContent={renderEventContent}
