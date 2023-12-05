@@ -192,7 +192,7 @@ const Login = () => {
       sx={{textTransform:'none'}}
       fullWidth
     >
-      New To MyRoom? Create Your Own Now.
+      New To Dailyhub? Create Your Own Now.
     </Button>
   
 

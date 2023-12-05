@@ -21,12 +21,22 @@ export default function App() {
 
 
   function onMouseDown(e) {
+
+    if (e.target.name === 'Taskicon') {
+      console.log('点击了task按钮')
+      setTimeout(() => {
+        navigate(`/todo`)
+       
+      }, 1000); 
+    
+    }
     if (e.target.name === 'Schedulebutton') {
       setTimeout(() => {
 
         navigate('/schedule');
       }, 1000); 
     }
+
     if (e.target.name === 'Diarybutton') {
       console.log('点击了diray按钮')
       setTimeout(() => {
@@ -64,9 +74,13 @@ if (e.target.name === 'Exiticon') {
   } 
 }
 
+
+
+
+
 }
   return (
-  <Spline scene="../../../public/models/mainroom.splinecode" onMouseDown={onMouseDown}/>
+  <Spline scene="https://prod.spline.design/mi3laVB2TwqfVImh/scene.splinecode"  onMouseDown={onMouseDown}/>
   );
 
 }

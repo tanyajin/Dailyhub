@@ -76,7 +76,7 @@ export default function InitialScene() {
                 <h1 className="text-6xl font-extrabold leading-snug">
                   Welcome to
                   <br />
-                  <span >Myroom</span>
+                  <span >Dailyhub</span>
                 </h1>
                 <motion.p
                   className="text-lg text-gray-600 mt-4 italic"
@@ -93,7 +93,7 @@ export default function InitialScene() {
                     delay: 1.5,
                   }}
                 >
-                  A Room of Your Own
+                  Where Diaries, Schedules, and Tasks Unite.
                 </motion.p>
                 <motion.button
                   onClick={handleNavigate}
@@ -113,7 +113,7 @@ export default function InitialScene() {
                   }}
 
                 >
-                  Enter Myroom
+                  Enter Dailyhub
                 </motion.button >
               </div >
             </motion.section>

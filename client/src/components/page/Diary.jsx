@@ -110,7 +110,9 @@ const sidebarWidth = 250
               
                <Typography variant='body1' fontWeight='1000' 
                sx={{padding:'0px',margin:'0px'}}>
-                  😊 Hi, {user.username}   
+                  {/* 😊 Hi, {user.username}    */}
+               Diary Board
+                     
                   </Typography>
                   <IconButton onClick={Return}>
                     <LogoutOutlinedIcon fontSize='small'/>

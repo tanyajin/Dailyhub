@@ -1,6 +1,7 @@
 const Diary = require('../models/diarySchema')
 
 exports.create = async (req, res) => {
+    console.log(req)
     try {
         const DiarysCount = await Diary.find().count()
         const diary = await Diary.create({

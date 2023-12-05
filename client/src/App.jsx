@@ -8,6 +8,9 @@ import Schedule from "./components/page/Schedule";
 import Diary from './components/page/Diary'
 import Board from './components/common/Board'
 import Editor from './components/common/Editor'
+
+import Todo from './components/page/Todo'
+
 import '@fontsource/roboto/300.css'
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
@@ -22,18 +25,13 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/home" element={<HomeScene />}/>
         <Route path="/schedule" element={<Schedule />} />  
+        <Route path="/todo" element={<Todo />} /> 
 
         <Route path='/diary' element={<Diary />}>
         <Route index element={<Board />}/>
         <Route path='/diary/:diaryId' element={<Editor />}/>
         </Route>
         
-
-<Route>
-
-
-
-</Route>
       </Routes>
     </BrowserRouter>
   );

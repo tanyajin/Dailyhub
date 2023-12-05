@@ -227,7 +227,7 @@ const Signup = () => {
         sx={{textTransform:'none'}}
         fullWidth
         >
-          Already In? Enter MyRoom Now.
+          Already In? Enter Dailyhub Now.
       </Button>
 
     </Box>

@@ -7,7 +7,7 @@ export const store = configureStore({
     reducer:{
         user:userReducer,
         diary:diaryReducer,
-        allFavorites:favoritesReducer
-
+        allFavorites:favoritesReducer,
+        
     }
 })

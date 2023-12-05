@@ -7,7 +7,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 
 import { INITIAL_EVENTS } from '../../tools/event-utils';
-import {IconButton,Typography} from '@mui/material'
+import {IconButton} from '@mui/material'
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined'
 import eventApi from '../../api/eventApi';
 
@@ -116,19 +116,14 @@ function Schedule() {
 
   const renderSidebar = () => {
     return (
-      
       <div className='demo-app-sidebar'>
-        <div style={{ margin:'10px'}}>
-        <Typography variant='body3' >
-          Schedule Board
-          <IconButton onClick={() =>  navigate('/home')} style={{marginLeft:'140px'}}>
+        <div style={{ textAlign: 'right',margin:'10px'}}>
+          <IconButton onClick={() => navigate(-1)}>
                     <LogoutOutlinedIcon fontSize='small'/>
                   </IconButton>
-          </Typography>
-          
         </div>
         <div className='demo-app-sidebar-section'>
-          {/* <h2>Instructions</h2> */}
+          <h2>Instructions</h2>
           <ul>
           <li>
             <label>
@@ -152,9 +147,7 @@ function Schedule() {
           
         </div>
         <div className='demo-app-sidebar-section'>
-        <Typography variant='body1' fontWeight='1000' >
-          All Events ({currentEvents.length})
-          </Typography>
+          <h2>All Events ({currentEvents.length})</h2>
           <ul>{currentEvents.map(renderSidebarEvent)}</ul>
         </div>
       </div>
