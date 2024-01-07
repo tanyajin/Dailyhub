@@ -63,3 +63,10 @@ yarn start run
 
  ### 2. Public Access
  - **Via Public IP Address:** [Dailyhub](http://3.113.11.86/)
+
+## Test Account
+
+you can use the following example account to log in the system:
+
+- **Username:** jinjin
+- **Password:** 11111111
