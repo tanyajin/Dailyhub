@@ -59,7 +59,7 @@ cd Dailyhub/server
 yarn start run 
 ```
 
-### The application should now be running on localhost:default port, e.g. http://127.0.0.1:5173
+#### The application should now be running on localhost:default port, e.g. http://127.0.0.1:5173
 
  ### 2. Public Access
  - **Via Public IP Address:** [Dailyhub](http://3.113.11.86/)
