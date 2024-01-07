@@ -31,28 +31,6 @@ The core features of the system include schedule management, task management, an
  ### 1. Running Locally
 To get this project running locally, follow these steps:
 
- #### 1) Installing MongoDB
-To run this application, you need to have MongoDB installed and running on your local machine. Follow these steps to set up MongoDB locally and configure the necessary environment variables.
-
- **Download MongoDB Compass**:
-   - Download the appropriate version for your operating system: [MongoDB Compass](https://www.mongodb.com/products/tools/compass).
-
-**Install MongoDB**:
-   - Follow the installation instructions provided on the MongoDB website for your specific operating system.
-
- **Run MongoDB**:
-   - After installation, start the MongoDB server.
-   - On most systems, this can be done using the command line with a command like `mongod`.
-
-#### 2) Setting Up the Database
-   - Connect to your local MongoDB instance (usually through a MongoDB client or the MongoDB shell).
-   - Create a new database named `diary-app` or the name you like.
-
- #### 3) Running the Application
-
-Once you have MongoDB installed and the environment variables set up, you can run the application as described in the [Running the Application](#running-the-application) section.
-
-Remember to restart your development environment or terminal session to ensure that the changes to environment variables take effect.
 
 - Clone the repository
 ```bash
@@ -81,5 +59,5 @@ cd Dailyhub/server
 yarn start run 
 ```
 
-# The application should now be running on [mention the default port, e.g., http://localhost:3000]
+# The application should now be running on localhost:default port, e.g., http://127.0.0.1:5173
 
